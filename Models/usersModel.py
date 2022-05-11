@@ -60,20 +60,38 @@ class Users:
             }
             data.append(userData)
         # print(data)
+        conn.commit()
         conn.close()
         return data
 
-    def update(data):
-        print(data)
+    def update(data, newData):
+        print(newData['username'])
+        emptyArray = []
         conn = get_db_connection()
-        users = conn.execute('DELETE FROM users WHERE id=?', (id,))
+        users = conn.execute('UPDATE users SET username = ?, email=? WHERE id = ?RETURNING *', ( newData['username'],newData['email'],data['id']))
+        print(users)
+        for user in users: 
+            print(user["id"],user["email"], user["username"] )
+            userData = {
+                "id": user["id"],
+                "email": user["email"],
+                "username": user["username"]
+            }
+            emptyArray.append(userData)
+        # print(data)
+        # conn.commit()
         conn.close()
-        return
+        return emptyArray
     
     
     def delete(id):
         print(id)
         conn = get_db_connection()
         users = conn.execute('DELETE FROM users WHERE id=?', (id,))
+        conn.commit()
         conn.close()
         return
+
+# delete = Users(1, "hello", "hi")
+# print(id(delete))
+# deleteUser = delete.update()
