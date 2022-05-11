@@ -20,7 +20,6 @@ def users_handlers():
         'POST': users.create
     }
     resp, code = fns[request.method](request)
-    # print(resp)
     return jsonify(resp), code
 
 @app.route('/api/users/<username>', methods=['GET', 'PATCH', 'PUT', 'DELETE'])
