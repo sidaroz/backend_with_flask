@@ -18,7 +18,6 @@ class Users:
         conn = get_db_connection()
         users = conn.execute('SELECT * FROM users').fetchall()
         for user in users:
-            # userData = Users(user["id"], user["username"], user["email"])
             userData = {
                 "id": user["id"],
                 "email": user["email"],
@@ -32,7 +31,6 @@ class Users:
     @classmethod
     def show(self, username):
         data = []
-
         conn = get_db_connection()
         users = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchall()
         for user in users:
@@ -47,7 +45,6 @@ class Users:
     
     @classmethod
     def create(self, userData):
-        # print(userData)
         data = []
         conn = get_db_connection()
         users = conn.execute('INSERT INTO users (username, email) VALUES (?,?) RETURNING *', (userData["username"],userData["email"])).fetchall()
@@ -59,7 +56,6 @@ class Users:
                 "username": user["username"]
             }
             data.append(userData)
-        # print(data)
         conn.commit()
         conn.close()
         return data
@@ -91,7 +87,3 @@ class Users:
         conn.commit()
         conn.close()
         return
-
-# delete = Users(1, "hello", "hi")
-# print(id(delete))
-# deleteUser = delete.update()

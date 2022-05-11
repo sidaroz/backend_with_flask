@@ -17,19 +17,13 @@ def create(req):
 
 def update(req, username):
     fetchUser = usersModel.Users.show(username)
-    # print(fetchUser)
     newData = req.get_json()
     updatedUser = usersModel.Users.update(fetchUser[0], newData)
-
-    # data = req.get_json()
-    # for key, val in data.items():
-    #     foundUser[key] = val
-    # return foundUser, 200
     return
 
 def destroy(req, username):
     fetchUser = usersModel.Users.show(username)
-    deletedUser = usersModel.Users.delete(fetchUser[0]['id']) #This will not work until we use the OOP to make our objects.(i think...)
+    deletedUser = usersModel.Users.delete(fetchUser[0]['id'])
     print(fetchUser)
     return fetchUser, 204
 
