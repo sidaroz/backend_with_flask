@@ -61,7 +61,6 @@ class Users:
         return data
 
     def update(data, newData):
-        print(newData['username'])
         emptyArray = []
         conn = get_db_connection()
         users = conn.execute('UPDATE users SET username = ?, email=? WHERE id = ?RETURNING *', ( newData['username'],newData['email'],data['id']))
@@ -74,8 +73,9 @@ class Users:
                 "username": user["username"]
             }
             emptyArray.append(userData)
-        # print(data)
-        # conn.commit()
+        print(data)
+        print(userData)
+        conn.commit()
         conn.close()
         return emptyArray
     

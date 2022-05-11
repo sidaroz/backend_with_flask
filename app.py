@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug import exceptions 
-from flask_sqlalchemy import SQLAlchemy
 
 from controllers import users 
 

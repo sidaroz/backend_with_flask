@@ -19,7 +19,7 @@ def update(req, username):
     fetchUser = usersModel.Users.show(username)
     newData = req.get_json()
     updatedUser = usersModel.Users.update(fetchUser[0], newData)
-    return
+    return updatedUser, 203
 
 def destroy(req, username):
     fetchUser = usersModel.Users.show(username)
